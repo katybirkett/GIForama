@@ -21,7 +21,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search for GIFs"
       />
-      <button type="submit">Search</button>
+      <button type="submit" disabled={query.trim() === ""}>
+        Search
+      </button>
     </form>
   );
 };

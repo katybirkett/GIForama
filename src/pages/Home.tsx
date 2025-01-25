@@ -8,6 +8,13 @@ import "./../styles/App.css";
 import Footer from "../components/Footer";
 import Skeleton from "../components/Skeleton";
 
+// DID NOT GET TIME
+// if I would do the save functionality using local storage
+// routing with react router dom
+// I would also add my own page of my favourite gif but you'd only be able to find it through the code
+// it would just be the gif of "It's Illegal for you to ask me that" from I Think You Should Leave
+// I fully intended on adding a "helpful" chat bot to this that would only respond in that gif
+
 const Home: React.FC = () => {
   const [gifs, setGifs] = useState<Gif[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
