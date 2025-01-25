@@ -10,7 +10,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSearch(query);
-    setQuery(""); // Clear search field after submitting
+    setQuery("");
   };
 
   return (

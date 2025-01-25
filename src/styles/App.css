@@ -9,11 +9,17 @@
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
   
   .App {
     text-align: center;
     padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
   }
   
   h1 {
@@ -70,21 +76,30 @@
     transform: scale(1.05);
   }
   
-  
-  p {
-    font-size: 1.2rem;
-    color: #888;
+  /* Show More Button */
+  .show-more {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ff385c;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 20px 0;
+    transition: background-color 0.3s ease;
   }
-
-  /* footer */
+  
+  .show-more:hover {
+    background-color: #ff2a43;
+  }
+  
+  /* Footer */
   .footer {
     background-color: #2c2f33;
     color: #fff;
     padding: 20px;
     text-align: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+    position: relative;
     font-size: 14px;
   }
   
@@ -107,4 +122,50 @@
   .footer p {
     margin: 5px 0;
   }
-
+  
+  /* Skeleton Styles */
+  .skeleton-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+  }
+  
+  .skeleton-card {
+    width: 200px;
+    height: 250px;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .skeleton-image {
+    width: 100%;
+    height: 150px;
+    background-color: #ccc;
+    border-radius: 8px;
+    animation: skeleton-loading 1.5s infinite ease-in-out;
+  }
+  
+  .skeleton-text {
+    width: 70%;
+    height: 16px;
+    background-color: #ccc;
+    border-radius: 4px;
+    animation: skeleton-loading 1.5s infinite ease-in-out;
+  }
+  
+  @keyframes skeleton-loading {
+    0% {
+      background-color: #ccc;
+    }
+    50% {
+      background-color: #f0f0f0;
+    }
+    100% {
+      background-color: #ccc;
+    }
+  }
