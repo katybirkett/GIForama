@@ -1,40 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { getTrendingGifs } from "../api/getTrendingGifs";
 import { Gif } from "../types/giphy";
 import { getSearchedGifs } from "../api/getSearchedGifs";
 import SearchBar from "../components/SearchBar";
 import List from "../components/List";
 import "./../styles/App.css";
-import Footer from "../components/Footer";
 import Skeleton from "../components/Skeleton";
-
-// DID NOT GET TIME
-// if I would do the save functionality using local storage
-// routing with react router dom
-// I would also add my own page of my favourite gif but you'd only be able to find it through the code
-// it would just be the gif of "It's Illegal for you to ask me that" from I Think You Should Leave
-// I fully intended on adding a "helpful" chat bot to this that would only respond in that gif
+import { toggleSaveGif } from "../utility/localStorageUtils";
+import { Link } from "react-router-dom";
 
 const Home: React.FC = () => {
   const [gifs, setGifs] = useState<Gif[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [query, setQuery] = useState<string>("");
+  // flag to prevent duplicate fetches
+  const isFetching = useRef(false);
 
   // Number of GIFs per page
   const perPage = 25;
 
   useEffect(() => {
-    // Only fetch trending GIFs if there's no search query
-    if (query === "") {
-      // this dumb line fixes the strictmode calling useEffect twice 'bug' because it was annoying me but it isnt necessary
-      // this wouldnt cause issues in prod
-      if (gifs.length < page * perPage) {
+    if (!isFetching.current) {
+      isFetching.current = true;
+      console.log("here");
+      // Only fetch trending GIFs if there's no search query
+      if (query === "") {
         fetchTrendingGifs();
+      } else {
+        // Fetch search results when the query changes
+        fetchSearchGifs(query);
       }
-    } else {
-      // Fetch search results when the query changes
-      fetchSearchGifs(query);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query, page]);
@@ -48,6 +44,7 @@ const Home: React.FC = () => {
       console.error("Error fetching trending GIFs", error);
     } finally {
       setLoading(false);
+      isFetching.current = false;
     }
   };
 
@@ -61,6 +58,7 @@ const Home: React.FC = () => {
       console.error("Error searching for GIFs", error);
     } finally {
       setLoading(false);
+      isFetching.current = false;
     }
   };
 
@@ -75,14 +73,17 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="App">
+    <>
       <h1>GIForama GIF Finder</h1>
       <SearchBar onSearch={handleSearch} />
+      <Link to="/my-favorite-gif" style={{ display: "none" }}>
+        my favourite gif
+      </Link>
       {loading ? (
         // Show 5 skeleton loaders while loading
         <Skeleton count={5} />
       ) : (
-        <List gifs={gifs} />
+        <List gifs={gifs} onSave={toggleSaveGif} />
       )}
       {/* Only show "Show More" button when there are GIFs loaded, and it's not a search */}
       {!loading && gifs.length > 0 && (
@@ -90,8 +91,10 @@ const Home: React.FC = () => {
           Show More
         </button>
       )}
-      <Footer />
-    </div>
+      <Link to="/saved" style={{ marginTop: "20px", display: "block" }}>
+        View Saved GIFs
+      </Link>
+    </>
   );
 };
 

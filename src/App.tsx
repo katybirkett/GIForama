@@ -1,10 +1,19 @@
+import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
+import SavedGifs from "./pages/SavedGifs";
+import MyFavoriteGif from "./pages/MyFavouriteGif";
+import Footer from "./components/Footer";
 
 function App() {
   return (
-    <>
-      <Home />
-    </>
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/saved" element={<SavedGifs />} />
+        <Route path="/my-favorite-gif" element={<MyFavoriteGif />} />
+      </Routes>
+      <Footer />
+    </div>
   );
 }
 
