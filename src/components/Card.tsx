@@ -27,12 +27,7 @@ const Card: React.FC<CardProps> = ({ gif, onSave }) => {
     <div className="gif-card">
       <img src={gif.images.fixed_height.url} alt={gif.title} />
       <p>{gif.title}</p>
-      <button
-        onClick={handleSaveClick}
-        className={`save-button ${isSaved ? "saved" : ""}`}
-      >
-        {isSaved ? "Unsave" : "Save"}
-      </button>
+      <button onClick={handleSaveClick}>{isSaved ? "Unsave" : "Save"}</button>
     </div>
   );
 };

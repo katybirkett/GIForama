@@ -54,7 +54,7 @@ button {
 }
 
 button:hover {
-    background-color: #ff2a43;
+    background-color: #e02947;
 }
 
 button:disabled {
@@ -97,7 +97,7 @@ button:disabled {
 }
 
 .show-more:hover {
-    background-color: #ff2a43;
+    background-color: #e02947;
 }
 
 /* Footer */
@@ -189,28 +189,5 @@ button:disabled {
 }
 
 .gif-card button:hover {
-    background-color: #ff2a43;
-}
-
-/* Unsave Button */
-.gif-card button.unsave-button {
-    background-color: #ff2a43;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-top: 10px; 
-}
-
-.gif-card button.unsave-button:hover {
-    background-color: #e02f3f;
-}
-
-.gif-card button:disabled {
-    background-color: #ccc;
-    color: #666;
-    cursor: not-allowed;
-    opacity: 0.6;
+    background-color: #e02947;
 }
