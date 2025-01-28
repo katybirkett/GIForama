@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import SavedGifs from "./pages/SavedGifs";
 import MyFavoriteGif from "./pages/MyFavouriteGif";
 import Footer from "./components/Footer";
+import "./styles/App.css";
 
 function App() {
   return (
